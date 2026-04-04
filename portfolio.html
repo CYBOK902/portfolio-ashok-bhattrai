@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ashok Bhattarai — Graphic Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #030610;
+  --panel: #080f1f;
+  --gold: #f5c842;
+  --gold2: #e0a500;
+  --cyan: #00e5ff;
+  --text: #c8d8f0;
+  --dim: #4a5a78;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s;box-shadow:0 0 12px var(--cyan),0 0 30px rgba(0,229,255,0.4);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,229,255,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(3,6,16,0.97),transparent);backdrop-filter:blur(4px);}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:4px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--dim);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--cyan);transition:width 0.3s;}
+.nav-links a:hover{color:var(--cyan);}
+.nav-links a:hover::after{width:100%;}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 80px 80px;z-index:1;gap:60px;}
+.hero-tag{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+.hero-tag::before{content:'';display:block;width:40px;height:1px;background:var(--cyan);}
+.hero-name{font-family:'Orbitron',sans-serif;font-size:clamp(36px,5vw,62px);font-weight:900;line-height:1;color:#fff;margin-bottom:8px;opacity:0;animation:fadeUp 0.8s 0.35s forwards;}
+.hero-name span{color:var(--gold);}
+.hero-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:300;color:var(--dim);letter-spacing:6px;text-transform:uppercase;margin-bottom:32px;opacity:0;animation:fadeUp 0.8s 0.5s forwards;}
+.hero-bio{font-size:16px;line-height:1.8;color:var(--text);max-width:420px;margin-bottom:44px;opacity:0;animation:fadeUp 0.8s 0.65s forwards;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.8s forwards;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--gold);color:#000;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.25s;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 0 20px rgba(245,200,66,0.3);}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border:1px solid var(--cyan);color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.25s;}
+.btn-secondary:hover{background:rgba(0,229,255,0.08);box-shadow:0 0 20px rgba(0,229,255,0.25);transform:translateY(-2px);}
+
+/* PHOTO */
+.hero-right{position:relative;display:flex;justify-content:center;align-items:center;opacity:0;animation:fadeUp 0.9s 0.4s forwards;}
+.photo-frame{position:relative;width:300px;height:360px;}
+.photo-frame::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,var(--gold),transparent 50%,var(--cyan));clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));z-index:0;animation:glowPulse 3s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{opacity:1;}50%{opacity:0.55;}}
+.photo-frame img{position:relative;z-index:1;width:296px;height:356px;object-fit:cover;object-position:top center;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));filter:saturate(0.9) contrast(1.05);}
+.corner-accent{position:absolute;width:40px;height:40px;border-color:var(--gold);border-style:solid;}
+.corner-accent.tl{top:-8px;left:-8px;border-width:2px 0 0 2px;}
+.corner-accent.br{bottom:-8px;right:-8px;border-width:0 2px 2px 0;}
+
+/* STATS */
+.stats-row{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(0,229,255,0.1);border-bottom:1px solid rgba(0,229,255,0.1);margin:0 80px;}
+.stat{padding:32px 40px;border-right:1px solid rgba(0,229,255,0.1);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Orbitron',sans-serif;font-size:40px;font-weight:900;color:var(--gold);display:block;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:100px 80px;}
+.section-header{display:flex;align-items:center;gap:20px;margin-bottom:60px;}
+.section-num{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:2px;}
+.section-line{flex:1;height:1px;background:linear-gradient(to right,rgba(0,229,255,0.4),transparent);}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+.skill-card{background:var(--panel);border:1px solid rgba(0,229,255,0.08);padding:28px 20px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));display:flex;flex-direction:column;align-items:center;gap:14px;transition:all 0.3s;position:relative;overflow:hidden;}
+.skill-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.skill-card:hover{border-color:rgba(245,200,66,0.3);transform:translateY(-4px);}
+.skill-card:hover::before{transform:scaleX(1);}
+.skill-icon{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:#fff;}
+.skill-bar-wrap{width:100%;background:rgba(255,255,255,0.05);height:3px;border-radius:2px;overflow:hidden;}
+.skill-bar{height:100%;background:linear-gradient(to right,var(--gold),var(--cyan));border-radius:2px;}
+.skill-name{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px;text-align:center;}
+.skill-pct{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--gold);}
+
+/* PORTFOLIO SECTIONS */
+.work-section-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.work-section-label::before{content:'';display:block;width:24px;height:1px;background:var(--cyan);}
+.work-section-title{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:24px;}
+.work-section-desc{font-family:'Rajdhani',sans-serif;font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:32px;max-width:480px;}
+
+/* FEATURED - large */
+.work-featured{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:80px;}
+.work-featured.reverse{direction:rtl;}
+.work-featured.reverse > *{direction:ltr;}
+.work-img-wrap{position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));}
+.work-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,200,66,0.15),transparent);z-index:1;pointer-events:none;transition:opacity 0.3s;}
+.work-img-wrap:hover::before{opacity:0;}
+.work-img-wrap img{width:100%;display:block;transition:transform 0.5s ease;filter:saturate(0.95);}
+.work-img-wrap:hover img{transform:scale(1.04);}
+.work-tag{display:inline-block;padding:5px 14px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:12px;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
+.work-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.work-tool{padding:4px 10px;border:1px solid rgba(0,229,255,0.2);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:1px;}
+
+/* GRID - 2-up */
+.work-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:80px;}
+.work-card-sm{position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));border:1px solid rgba(0,229,255,0.1);transition:border-color 0.3s;}
+.work-card-sm:hover{border-color:rgba(245,200,66,0.4);}
+.work-card-sm img{width:100%;display:block;transition:transform 0.5s;}
+.work-card-sm:hover img{transform:scale(1.04);}
+.work-card-sm .work-card-info{padding:18px 20px;background:var(--panel);}
+.work-card-info .work-tag{margin-bottom:8px;}
+.work-card-info .work-section-title{font-size:15px;margin-bottom:8px;}
+.work-card-info p{font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--dim);line-height:1.6;}
+
+/* EXP & EDU */
+.exp-card{background:var(--panel);border:1px solid rgba(0,229,255,0.08);padding:36px 40px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));position:relative;overflow:hidden;margin-bottom:16px;transition:border-color 0.3s;}
+.exp-card:hover{border-color:rgba(245,200,66,0.3);}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),var(--cyan));}
+.exp-role{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:6px;}
+.exp-company{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--text);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.exp-duration{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);opacity:0.7;letter-spacing:1px;}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.edu-card{background:var(--panel);border:1px solid rgba(0,229,255,0.08);padding:28px 32px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.3s;}
+.edu-card:hover{border-color:rgba(0,229,255,0.3);transform:translateY(-2px);}
+.edu-year{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;margin-bottom:8px;}
+.edu-degree{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:4px;}
+.edu-school{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--dim);letter-spacing:1px;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.contact-item{display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--panel);border:1px solid rgba(0,229,255,0.08);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));margin-bottom:12px;transition:border-color 0.3s;}
+.contact-item:hover{border-color:rgba(0,229,255,0.3);}
+.contact-icon{font-size:20px;width:32px;text-align:center;}
+.contact-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:4px;}
+.contact-val{font-family:'Rajdhani',sans-serif;font-size:15px;color:var(--text);font-weight:500;}
+
+/* FOOTER */
+footer{position:relative;z-index:1;padding:32px 80px;border-top:1px solid rgba(0,229,255,0.08);display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;}
+.footer-status{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:2px;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#00ff88;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:100px 32px 60px;}
+  .hero-right{order:-1;}
+  section{padding:60px 32px;}
+  .stats-row{margin:0 32px;grid-template-columns:1fr;}
+  .stat{border-right:none;border-bottom:1px solid rgba(0,229,255,0.1);}
+  .skills-grid{grid-template-columns:repeat(3,1fr);}
+  .work-featured{grid-template-columns:1fr;}
+  .work-featured.reverse{direction:ltr;}
+  .work-grid-2{grid-template-columns:1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  nav{padding:16px 24px;}
+  .nav-links{gap:16px;}
+  footer{padding:24px 32px;flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================= -->
+<!-- CONFIGURATION SECTION - EDIT HERE! -->
+<!-- ========================================= -->
+<script>
+// ============================================
+// PORFOLIO CONFIGURATION - Easily customizable!
+// ============================================
+
+const PORTFOLIO_CONFIG = {
+  // HERO SECTION
+  hero: {
+    tag: "Graphic Designer · Motion Graphics",
+    firstName: "Ashok",
+    lastName: "Bhattarai",
+    title: "Visual Creator",
+    bio: "I'm a passionate and versatile graphic designer with good skills in post-production. I am seeking opportunities to apply my design and editing skills to create outstanding, creative content.",
+    buttonPrimaryText: "View My Work",
+    buttonSecondaryText: "Get In Touch",
+    profileImage: "images/profile.jpg" // ← CHANGE THIS TO USE A DIFFERENT IMAGE
+  },
+
+  // NAVIGATION
+  nav: {
+    logo: "AB_PORTFOLIO",
+    links: ["Skills", "Works", "Experience", "Contact"]
+  },
+
+  // STATISTICS
+  stats: [
+    { number: "9+", label: "Months Experience" },
+    { number: "5", label: "Core Skills" },
+    { number: "100%", label: "Dedication" }
+  ],
+
+  // SKILLS SECTION - Add or remove skills easily
+  skills: [
+    { name: "Premiere Pro", pct: "85%", icon: "Pr" },
+    { name: "After Effects", pct: "88%", icon: "Ae" },
+    { name: "Illustrator", pct: "82%", icon: "Ai" },
+    { name: "InDesign", pct: "80%", icon: "Id" },
+    { name: "Photoshop", pct: "85%", icon: "Ps" }
+  ],
+
+  // PORTFOLIO WORKS - Easy to add more projects!
+  // Change images by updating the 'image' paths
+  portfolioWorks: [
+    {
+      id: "work1",
+      type: "featured",
+      title: "Motion Graphics & Animation",
+      tag: "MOTION GRAPHICS",
+      image: "images/work2.jpg", // ← CHANGE IMAGE PATH HERE
+      description: "Professional motion graphics and animation created using After Effects for promotional videos and social media content.",
+      tools: ["AFTER EFFECTS", "PREMIERE PRO"],
+      reverse: false
+    },
+    {
+      id: "work2",
+      type: "featured",
+      title: "Video Editing & Post-Production",
+      tag: "POST-PRODUCTION",
+      image: "images/work3.jpg", // ← CHANGE IMAGE PATH HERE
+      description: "Complete video editing and post-production work using industry-standard software for professional content creation.",
+      tools: ["PREMIERE PRO", "AFTER EFFECTS"],
+      reverse: true
+    },
+    {
+      id: "work3",
+      type: "grid",
+      title: "Graphic Design",
+      tag: "GRAPHIC DESIGN",
+      image: "images/work4.jpg", // ← CHANGE IMAGE PATH HERE
+      description: "Creative graphic design and visual content creation"
+    },
+    {
+      id: "work4",
+      type: "grid",
+      title: "Design & Branding",
+      tag: "BRANDING",
+      image: "images/work5.jpg", // ← CHANGE IMAGE PATH HERE
+      description: "Professional branding and design work using Adobe Creative Suite"
+    }
+  ],
+
+  // EXPERIENCE SECTION
+  experience: [
+    {
+      role: "Freelance Graphic Designer",
+      company: "Self-Employed",
+      duration: "2024 - Present"
+    },
+    {
+      role: "Motion Graphics Designer",
+      company: "Mysecondteacher",
+      duration: "9 Months (2024)"
+    }
+  ],
+
+  // EDUCATION SECTION
+  education: [
+    {
+      year: "2080",
+      degree: "Diploma in IT",
+      school: "Nepal Banepa Polytechnic Institute"
+    },
+    {
+      year: "2024",
+      degree: "Graphic Designing Certification",
+      school: "Animax Animation Academy"
+    },
+    {
+      year: "2024",
+      degree: "Post Production & VFX",
+      school: "Animax Animation Academy"
+    },
+    {
+      year: "2076",
+      degree: "SLC (Secondary Education)",
+      school: "Amenity English Secondary School"
+    }
+  ],
+
+  // CONTACT INFORMATION
+  contact: [
+    { icon: "📧", label: "Email", value: "9861ashokbhattarai@gmail.com" },
+    { icon: "📱", label: "Phone", value: "9861691769" },
+    { icon: "📍", label: "Location", value: "Kausaltar 03, Bhaktapur" },
+    { icon: "🆔", label: "Citizenship", value: "29-01-78-04034" }
+  ],
+
+  // FOOTER
+  footer: {
+    copy: "© 2025 ASHOK BHATTARAI · ALL RIGHTS RESERVED",
+    status: "AVAILABLE FOR PROJECTS"
+  }
+};
+</script>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo" id="navLogo"></div>
+  <div class="nav-links" id="navLinks"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag" id="heroTag"></div>
+    <h1 class="hero-name"><span id="heroFirstName"></span><br><span id="heroLastName"></span></h1>
+    <div class="hero-title" id="heroTitle"></div>
+    <p class="hero-bio" id="heroBio"></p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary">◈ <span id="btnPrimaryText"></span></a>
+      <a href="#contact" class="btn-secondary">◎ <span id="btnSecondaryText"></span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <div class="corner-accent tl"></div>
+      <div class="corner-accent br"></div>
+      <img id="profileImage" src="" alt="Profile" />
+    </div>
+  </div>
+</section>
+
+<!-- STATISTICS -->
+<div class="stats-row" id="statsContainer"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">[ 01 ]</span>
+    <h2 class="section-title">SKILLS</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid" id="skillsContainer"></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <span class="section-num">[ 02 ]</span>
+    <h2 class="section-title">WORKS</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="portfolioContainer"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">[ 03 ]</span>
+    <h2 class="section-title">EXPERIENCE</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="experienceContainer"></div>
+  
+  <div class="section-header" style="margin-top:80px;">
+    <span class="section-num">[ 04 ]</span>
+    <h2 class="section-title">EDUCATION</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid" id="educationContainer"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">[ 05 ]</span>
+    <h2 class="section-title">CONTACT</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div id="contactContainer"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy" id="footerCopy"></div>
+  <div class="footer-status"><div class="status-dot"></div><span id="footerStatus"></span></div>
+</footer>
+
+<!-- INITIALIZATION SCRIPT -->
+<script>
+// Populate all content from configuration
+function initPortfolio() {
+  const cfg = PORTFOLIO_CONFIG;
+
+  // Hero
+  document.getElementById('navLogo').textContent = cfg.nav.logo;
+  document.getElementById('heroTag').textContent = cfg.hero.tag;
+  document.getElementById('heroFirstName').textContent = cfg.hero.firstName;
+  document.getElementById('heroLastName').textContent = cfg.hero.lastName;
+  document.getElementById('heroTitle').textContent = cfg.hero.title;
+  document.getElementById('heroBio').textContent = cfg.hero.bio;
+  document.getElementById('btnPrimaryText').textContent = cfg.hero.buttonPrimaryText;
+  document.getElementById('btnSecondaryText').textContent = cfg.hero.buttonSecondaryText;
+  document.getElementById('profileImage').src = cfg.hero.profileImage;
+
+  // Navigation Links
+  const navLinks = document.getElementById('navLinks');
+  cfg.nav.links.forEach(link => {
+    const a = document.createElement('a');
+    a.href = '#' + link.toLowerCase();
+    a.textContent = link;
+    navLinks.appendChild(a);
+  });
+
+  // Statistics
+  const statsContainer = document.getElementById('statsContainer');
+  cfg.stats.forEach(stat => {
+    const statDiv = document.createElement('div');
+    statDiv.className = 'stat';
+    statDiv.innerHTML = `<span class="stat-num">${stat.number}</span><span class="stat-label">${stat.label}</span>`;
+    statsContainer.appendChild(statDiv);
+  });
+
+  // Skills
+  const skillsContainer = document.getElementById('skillsContainer');
+  cfg.skills.forEach(skill => {
+    const skillCard = document.createElement('div');
+    skillCard.className = 'skill-card reveal';
+    skillCard.innerHTML = `
+      <div class="skill-icon">${skill.icon}</div>
+      <div class="skill-pct">${skill.pct}</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width: ${skill.pct}"></div></div>
+      <div class="skill-name">${skill.name}</div>
+    `;
+    skillsContainer.appendChild(skillCard);
+  });
+
+  // Portfolio Works
+  const portfolioContainer = document.getElementById('portfolioContainer');
+  let gridContainer = null;
+
+  cfg.portfolioWorks.forEach((work, idx) => {
+    if (work.type === 'featured') {
+      const featured = document.createElement('div');
+      featured.className = `work-featured reveal ${work.reverse ? 'reverse' : ''}`;
+      featured.innerHTML = `
+        <div class="work-img-wrap">
+          <img src="${work.image}" alt="${work.title}" />
+        </div>
+        <div>
+          <div class="work-section-label">${work.tag}</div>
+          <h3 class="work-section-title">${work.title}</h3>
+          <p class="work-section-desc">${work.description}</p>
+          <div class="work-tools">
+            ${work.tools.map(tool => `<span class="work-tool">${tool}</span>`).join('')}
+          </div>
+        </div>
+      `;
+      portfolioContainer.appendChild(featured);
+    } else if (work.type === 'grid') {
+      if (!gridContainer) {
+        gridContainer = document.createElement('div');
+        gridContainer.className = 'work-grid-2';
+        portfolioContainer.appendChild(gridContainer);
+      }
+      const card = document.createElement('div');
+      card.className = 'work-card-sm reveal';
+      card.innerHTML = `
+        <img src="${work.image}" alt="${work.title}" />
+        <div class="work-card-info">
+          <span class="work-tag">${work.tag}</span>
+          <h4 class="work-section-title">${work.title}</h4>
+          <p>${work.description}</p>
+        </div>
+      `;
+      gridContainer.appendChild(card);
+    }
+  });
+
+  // Experience
+  const experienceContainer = document.getElementById('experienceContainer');
+  cfg.experience.forEach(exp => {
+    const card = document.createElement('div');
+    card.className = 'exp-card reveal';
+    card.innerHTML = `
+      <div class="exp-role">${exp.role}</div>
+      <div class="exp-company">${exp.company}</div>
+      <div class="exp-duration">${exp.duration}</div>
+    `;
+    experienceContainer.appendChild(card);
+  });
+
+  // Education
+  const educationContainer = document.getElementById('educationContainer');
+  cfg.education.forEach(edu => {
+    const card = document.createElement('div');
+    card.className = 'edu-card reveal';
+    card.innerHTML = `
+      <div class="edu-year">${edu.year}</div>
+      <div class="edu-degree">${edu.degree}</div>
+      <div class="edu-school">${edu.school}</div>
+    `;
+    educationContainer.appendChild(card);
+  });
+
+  // Contact
+  const contactContainer = document.getElementById('contactContainer');
+  const contactDiv = document.createElement('div');
+  cfg.contact.forEach(contact => {
+    const item = document.createElement('div');
+    item.className = 'contact-item reveal';
+    item.innerHTML = `
+      <div class="contact-icon">${contact.icon}</div>
+      <div>
+        <div class="contact-label">${contact.label}</div>
+        <div class="contact-val">${contact.value}</div>
+      </div>
+    `;
+    contactDiv.appendChild(item);
+  });
+  contactContainer.appendChild(contactDiv);
+
+  // Footer
+  document.getElementById('footerCopy').textContent = cfg.footer.copy;
+  document.getElementById('footerStatus').textContent = cfg.footer.status;
+}
+
+// Run initialization
+initPortfolio();
+
+// Cursor tracking
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+
+document.querySelectorAll('a, button, .skill-card, .work-card-sm, .work-img-wrap, .contact-item, .exp-card, .edu-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1.8)';
+    cursor.style.background = 'var(--gold)';
+    ring.style.borderColor = 'rgba(245,200,66,0.5)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    cursor.style.background = 'var(--cyan)';
+    ring.style.borderColor = 'rgba(0,229,255,0.5)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+# OS files
+.DS_Store
+Thumbs.db
+*.bak
+
+# Extra files not needed for portfolio
+*.png
+.env
+node_modules/
