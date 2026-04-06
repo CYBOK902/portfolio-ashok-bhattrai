@@ -1,5 +1,7 @@
 # Ashok Bhattarai - Portfolio
 
+[![View Portfolio](https://ashokbh0863-commits.github.io/portfolio-ashok/images/screenshot.png)](https://ashokbh0863-commits.github.io/portfolio-ashok/)
+
 A modern, responsive portfolio website for Ashok Bhattarai, a passionate Graphic Designer and Motion Graphics specialist.
 
 ## 🎨 Features
